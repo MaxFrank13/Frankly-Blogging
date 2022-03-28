@@ -1,12 +1,8 @@
-// user HAS MANY posts & comments
-// post HAS MANY comments & BELONGS TO ONE user
-// comment BELONGS TO ONE user & BELONGS TO ONE post
-
 const User = require('./User');
-const Post = require('./Post');
+const Thread = require('./Thread');
 const Comment = require('./Comment');
 
-User.hasMany(Post, {
+User.hasMany(Thread, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
@@ -16,12 +12,12 @@ User.hasMany(Comment, {
   onDelete: 'CASCADE'
 });
 
-Post.hasMany(Comment, {
-	foreignKey: 'post_id',
+Thread.hasMany(Comment, {
+	foreignKey: 'thread_id',
 	onDelete: 'CASCADE'
 });
 
-Post.belongsTo(User, {
+Thread.belongsTo(User, {
 	foreignKey: 'user_id'
 });
 
@@ -29,12 +25,12 @@ Comment.belongsTo(User, {
 	foreignKey: 'user_id'
 });
 
-Comment.belongsTo(Post, {
-	foreignKey: 'post_id'
+Comment.belongsTo(Thread, {
+	foreignKey: 'thread_id'
 });
 
 module.exports = {
   User,
-  Post,
+  Thread,
   Comment
 };

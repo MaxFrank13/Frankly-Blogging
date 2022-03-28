@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Thread } = require('../models');
 const withAuth = require('../utils/auth');
 
 
-// get home page and display posts
+// get home page and display threads
 router.get('/', async (req, res) => {
 	try {
-		const postData = await Post.findAll({
+		const threadData = await Thread.findAll({
 			include: [
 				{
 					model: User,
@@ -14,11 +14,11 @@ router.get('/', async (req, res) => {
 				},
 			],
 		});
-
-		const posts = postData.map(post => post.get({ plain: true }));
-
+		const threads = threadData.map(thread => thread.get({ plain: true }));
+		
+		console.log(threads)
 		res.render('homepage', {
-			posts,
+			threads,
 			logged_in: req.session.logged_in
 		});
 	} catch (err) {
@@ -27,12 +27,20 @@ router.get('/', async (req, res) => {
 });
 
 // path to the user's profile after checking authorization
-
 router.get('/profile', withAuth, async (req, res) => {
 	try {
-		
-	} catch (err) {
+		const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Project }],
+    });
+    const user = userData.get({ plain: true });
 
+    res.render('profile', {
+      ...user,
+      logged_in: true
+		});
+	} catch (err) {
+		res.status(500).json(err);
 	};
 })
 

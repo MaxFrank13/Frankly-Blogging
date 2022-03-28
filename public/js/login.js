@@ -5,6 +5,7 @@
 
 const signUpToggle = (event) => {
   if (event.target.textContent === 'Sign up here'){
+    console.log('here');
     document.location.replace('/signup');
   } else {
     document.location.replace('/login');
@@ -12,5 +13,5 @@ const signUpToggle = (event) => {
 };
 
 document
-  .querySelector('.signup-login')
+  .querySelector('.toggle-form')
   .addEventListener('click', signUpToggle);

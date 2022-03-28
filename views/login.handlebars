@@ -1,8 +1,43 @@
 {{!-- style out a log in form --}}
 
-<div>
-    <h1>Here will be a log in form</h1>
-    <button class="signup-login">Sign up here</button>
-</div>
+<section class="form-container">
+  <form class="login">
+
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" type="email" placeholder="email">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password
+      </label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="input" type="text" placeholder="password">
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button class="button is-link">Submit</button>
+      </div>
+      <div class="control">
+        <button class="button is-link is-light">Cancel</button>
+      </div>
+    </div>
+
+  </form>
+  <div>
+    <button class="button toggle-form">Sign up here</button>
+  </div>
+
+</section>
 
 <script src="/js/login.js"></script>

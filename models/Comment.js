@@ -19,10 +19,10 @@ Comment.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-		post_id: {
+		thread_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'post',
+        model: 'thread',
         key: 'id',
       },
     },
