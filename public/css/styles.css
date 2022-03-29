@@ -1,0 +1,186 @@
+/* Variables */
+
+:root {
+  /* colors */
+  --pale-teal: rgb(95 110 110);
+  --light-teal: rgb(116 175 175);
+  --teal: rgb(42, 114, 114);
+  --dark-teal: rgb(3 39 39);
+  --purple: rgb(40 31 70);
+
+  /* other */
+  --transition: 0.3s;
+}
+
+/* General Layout */
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--dark-teal);
+}
+
+header {
+  padding: 2% 10%;
+  box-shadow: 0px -10px 150px 5px var(--dark-teal), inset -12px -13px 11px -11px var(--light-teal), inset 13px 12px 11px -11px var(--pale-teal);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 80%;
+}
+
+/* Nav */
+
+nav.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  gap: 2rem;
+}
+
+#home {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-links * {
+  padding-right: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.nav-links > a:hover {
+  color: var(--light-teal);
+}
+
+/* Form */
+
+form {
+  margin: 1rem;
+}
+
+section.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+div.form-buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Thread display */
+
+section.card {
+  width: clamp(20rem, 65vw, 42.5rem);
+  padding: 0.5rem;
+  box-shadow: 0px 0px 5px 2px rgb(128, 128, 128);
+}
+
+.card-header-title {
+  background: linear-gradient(transparent, var(--light-teal));
+  border-bottom: 5px solid var(--dark-teal);
+  border-bottom-left-radius: 0.85rem;
+  border-bottom-right-radius: 0.85rem;
+}
+
+p.content {
+  padding: 0.5rem;
+}
+
+p.comments-icon {
+  display: flex;
+  gap: 2rem;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+
+/* New/edit Thread form */
+
+form.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: clamp(400px, 100%, 640px);
+  background: radial-gradient(var(--teal), var(--light-teal) 30%, transparent, transparent);
+  padding: 2rem
+}
+
+form.thread h1 {
+  text-transform: capitalize;
+  font-size: 2rem;
+  border-bottom: 3px solid var(--dark-teal);
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  font-weight: 600;
+}
+
+form.thread label {
+  font-size: 1.2rem;
+}
+
+form.thread input,
+form.thread textarea {
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  box-shadow: 0px 0px 5px 0px var(--purple);
+}
+
+button.post-thread {
+  margin: 1rem 15%;
+  width: clamp(270px, 70%, 400px);
+  background: var(--teal);
+  color: #fff;
+  transition: var(--transition);
+}
+
+button.post-thread:hover {
+  background: var(--dark-teal);
+  color: var(--light-teal);
+}
+
+
+/* Dashboard */
+
+section.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button.new-post {
+  background: var(--dark-teal);
+  color: var(--light-teal);
+  font-weight: 600;
+  transition: var(--transition);
+  margin-top: 1rem;
+}
+
+button.new-post:hover {
+  box-shadow: inset 0px 0px 8px 2px var(--pale-teal);
+  color: #fff;
+}

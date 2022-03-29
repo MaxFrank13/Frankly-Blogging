@@ -5,37 +5,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Frankly Blogging</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css" integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+    integrity="sha512-IgmDkwzs96t4SrChW29No3NXBIBv8baW490zk5aXvhCD8vuZM3yUSkbyTBcXohkySecyzIrUwiF/qV0cuPcL3Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
-  <div>
-    <header>
-      <h1>
-        <span role="img" aria-label="thinking">💭</span>
-        <a href="/">Keep it frank.</a>
+  <header>
+    <nav class="navbar">
+      <h1 class="navbar-item">
+        <a id="home" href="/">
+          <span role="img" aria-label="thinking">
+            💭
+          </span>Keep it frank.
+        </a>
       </h1>
-      <p>All web development related thoughts and ramblings welcome here</p>
-      <nav>
-        <!-- Conditionally render login or logout links -->
+      <div class="nav-links">
         {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button id="logout">logout</button>
+        <a class="button navbar-item" href="/dashboard">dashboard</a> |
+        <button id="logout" class="button navbar-item">logout</button>
         {{else}}
-        <a href="/login">login</a>
+        <a class="button navbar-item" href="/login">login</a>
         {{/if}}
-      </nav>
-    </header>
-    <main>
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
+      </div>
+      <!-- Conditionally render login or logout links -->
+    </nav>
+    <p class="navbar-item">All web development related thoughts and ramblings welcome here</p>
+  </header>
+
+  <main>
+    <!-- Render the sub layout -->
+    {{{ body }}}
+  </main>
+  <footer>
+
+  </footer>
 
   <!-- Render script for logged in users only -->
   {{#if logged_in}}

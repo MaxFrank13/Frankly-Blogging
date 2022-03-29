@@ -1,8 +1,26 @@
 const router = require('express').Router();
-const { User, Thread } = require('../models');
+const { json } = require('express/lib/response');
+const { User, Thread, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+router.get('/all', async (req, res) => {
+	try {
+		const userData = await User.findAll({
+			include: [{
+				model: Thread
+			},
+			{
+				model: Comment
+			}]
+		});
 
+		const users = userData.map(user => user.get({ plain: true }));
+
+		res.json(users);
+	} catch (err) {
+		res.status(500).json(err);
+	}
+})
 // get home page and display threads
 router.get('/', async (req, res) => {
 	try {
@@ -16,7 +34,6 @@ router.get('/', async (req, res) => {
 		});
 		const threads = threadData.map(thread => thread.get({ plain: true }));
 		
-		console.log(threads)
 		res.render('homepage', {
 			threads,
 			logged_in: req.session.logged_in
@@ -26,16 +43,16 @@ router.get('/', async (req, res) => {
 	};
 });
 
-// path to the user's profile after checking authorization
-router.get('/profile', withAuth, async (req, res) => {
+// path to the user's dashboard after checking authorization
+router.get('/dashboard', withAuth, async (req, res) => {
 	try {
 		const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Project }],
+      include: [{ model: Thread }],
     });
     const user = userData.get({ plain: true });
 
-    res.render('profile', {
+    res.render('dashboard', {
       ...user,
       logged_in: true
 		});

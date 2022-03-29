@@ -1,0 +1,17 @@
+<section class="card">
+  <h2 class="card-header-title">{{title}}</h2>
+  <p class="content">{{content}}</p>
+  <p class="card-footer-item">Posted by {{user.name}} on today </p>
+  <p class="card-footer-item comments-icon add-comment">
+    <i class="fa-solid fa-comment"></i>
+  </p>
+</section>
+{{#if comments.length}}
+<section class="comments">
+  {{#each comments as |comment|}}
+  <h3>{{comment.user.name}}</h3>
+  <p>{{comment.content}}</p>
+  <p>Commented on {{format_date comment.date_created}}</p>
+  {{/each}}
+</section>
+{{/if}}

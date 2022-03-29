@@ -1,0 +1,22 @@
+<section class="dashboard">
+  <h1 class="title">{{name}}</h1>
+  {{#if threads.length}}
+  {{#each threads as |thread|}}
+  <section class="card">
+    <h2 class="card-header-title">{{thread.title}}</h2>
+    <p class="comments-icon card-footer-item">
+      <i class="fa-solid fa-pen-to-square" data-id="{{thread.id}}"></i>
+      <i class="fa-solid fa-comments" data-id="{{thread.id}}"></i>
+    </p>
+    <p class="card-footer-item">Posted by {{thread.user.name}} on {{format_date thread.date_created}} </p>
+  </section>
+  {{/each}}
+  {{/if}}
+  <a href="/api/thread/">
+    <button class="button new-post">
+      New Post
+    </button>
+  </a>
+</section>
+
+<script src="/js/forum.js"></script>
