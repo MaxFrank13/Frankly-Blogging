@@ -4,14 +4,15 @@
   <label for="title">Title</label>
   <input class="thread-title" name="title" type="text" value="{{title}}">
   <label for="content">Content</label>
-  <textarea class="thread-content" name="content" cols="30" rows="10">{{content}}</textarea>
+  <textarea class="thread-content" name="content" cols="30" rows="5">{{content}}</textarea>
+  <button  data-function="edit" data-id="{{id}}" class="button post-thread">Edit your thoughts to hyperspace!</button>
   {{else}}
   <label for="title">Title</label>
   <input class="thread-title" name="title" type="text" placeholder="topic of your digression">
   <label for="content">Content</label>
-  <textarea class="thread-content" name="content" cols="30" rows="10" placeholder="spill your thoughts here"></textarea>
+  <textarea class="thread-content" name="content" cols="30" rows="5" placeholder="spill your thoughts here"></textarea>
+  <button class="button post-thread" data-function="post">Post your thoughts to hyperspace!</button>
   {{/if}}
-  <button class="button post-thread">Post your thoughts to hyperspace!</button>
 </form>
 
 <script src="/js/thread.js"></script>

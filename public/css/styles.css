@@ -2,10 +2,12 @@
 
 :root {
   /* colors */
+  --cream: rgb(237, 231, 213);
+  --white-teal: rgb(243, 246, 247);
   --pale-teal: rgb(95 110 110);
   --light-teal: rgb(116 175 175);
   --teal: rgb(42, 114, 114);
-  --dark-teal: rgb(3 39 39);
+  --dark-teal: rgb(3, 39, 39);
   --purple: rgb(40 31 70);
 
   /* other */
@@ -20,6 +22,7 @@ body {
   align-items: center;
   gap: 1rem;
   color: var(--dark-teal);
+  font-size: 1.1rem;
 }
 
 header {
@@ -39,13 +42,14 @@ main {
   width: 80%;
 }
 
+
 /* Nav */
 
 nav.navbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background: transparent;
   gap: 2rem;
 }
@@ -73,6 +77,25 @@ nav.navbar {
   color: var(--light-teal);
 }
 
+/* Default button styling */
+
+button.teal-btn {
+  background: var(--dark-teal);
+  color: var(--white-teal);
+  font-weight: 600;
+  transition: var(--transition);
+  margin-top: 0.25rem;
+}
+button.toggle-form {
+  background: var(--teal);
+}
+
+button.teal-btn:hover{
+  box-shadow: inset 0px 0px 8px 2px var(--pale-teal);
+  color: #fff;
+}
+
+
 /* Form */
 
 form {
@@ -95,8 +118,10 @@ div.form-buttons {
 
 section.card {
   width: clamp(20rem, 65vw, 42.5rem);
+  margin-bottom: 0.25rem;
   padding: 0.5rem;
-  box-shadow: 0px 0px 5px 2px rgb(128, 128, 128);
+  background: var(--white-teal);
+  box-shadow: 0px 0px 5px 2px rgb(128, 128, 128), inset 0px 0px 3px 3px var(--dark-teal);
 }
 
 .card-header-title {
@@ -106,17 +131,20 @@ section.card {
   border-bottom-right-radius: 0.85rem;
 }
 
-p.content {
-  padding: 0.5rem;
+p.content:not(:last-child) {
+  margin: 0;
+  padding: 1rem 1.5rem;
 }
 
-p.comments-icon {
+p.icon-container {
   display: flex;
   gap: 2rem;
-  cursor: pointer;
   font-size: 2rem;
 }
 
+p i {
+  cursor: pointer;
+}
 
 /* New/edit Thread form */
 
@@ -142,8 +170,8 @@ form.thread label {
   font-size: 1.2rem;
 }
 
-form.thread input,
-form.thread textarea {
+form input,
+form textarea {
   padding: 0.25rem;
   font-size: 1.25rem;
   box-shadow: 0px 0px 5px 0px var(--purple);
@@ -172,15 +200,42 @@ section.dashboard {
   align-items: center;
 }
 
-button.new-post {
-  background: var(--dark-teal);
-  color: var(--light-teal);
-  font-weight: 600;
-  transition: var(--transition);
-  margin-top: 1rem;
+/* Comment Form & Display */
+
+form.comment-form {
+  width: clamp(240px, 45vw, 400px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-button.new-post:hover {
-  box-shadow: inset 0px 0px 8px 2px var(--pale-teal);
-  color: #fff;
+section.comment-container {
+  width: clamp(18rem, 62vw, 40rem);
+  background: linear-gradient(var(--dark-teal) 0%, var(--teal) 5%, var(--cream) 31%, rgba(243,239,227,1) 69%, transparent);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  /* box-shadow: inset 0 0 4px 3px var(--dark-teal); */
+  border-radius: 0.25rem;
+  gap: 1rem;
+}
+
+section.comment {
+  padding: 0.75rem;
+  border-bottom: 2px solid var(--pale-teal);
+  box-shadow: inset 2px 2px 10px 3px var(--pale-teal);
+  border-radius: 0.25rem;
+  background: var(--white-teal);
+}
+
+section.comment h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+/* Hide class */
+
+form.hide {
+  display: none;
 }

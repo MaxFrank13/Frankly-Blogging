@@ -2,16 +2,25 @@
   <h2 class="card-header-title">{{title}}</h2>
   <p class="content">{{content}}</p>
   <p class="card-footer-item">Posted by {{user.name}} on today </p>
-  <p class="card-footer-item comments-icon add-comment">
-    <i class="fa-solid fa-comment"></i>
+  <p class="card-footer-item icon-container add-comment">
+    <i data-id="{{id}}" class="fa-solid fa-comment"></i>
   </p>
 </section>
+<form class="comment-form hide" data-threadid="{{id}}">
+  <textarea id="comment-content" name="content" cols="30" rows="5" placeholder="tell us how you really feel"></textarea>
+  <button class="button teal-btn">commit your thoughts</button>
+  <button class="button teal-btn cancel">nevermind</button>
+</form>
 {{#if comments.length}}
-<section class="comments">
+<section class="comment-container">
   {{#each comments as |comment|}}
-  <h3>{{comment.user.name}}</h3>
-  <p>{{comment.content}}</p>
-  <p>Commented on {{format_date comment.date_created}}</p>
+  <section class="comment">
+    <h3>{{comment.user.name}}</h3>
+    <p>{{comment.content}}</p>
+    <small>Commented on {{format_date comment.date_created}}</small>
+  </section>
   {{/each}}
 </section>
 {{/if}}
+
+<script src="/js/forum.js"></script>

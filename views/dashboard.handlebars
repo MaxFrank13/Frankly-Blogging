@@ -4,7 +4,7 @@
   {{#each threads as |thread|}}
   <section class="card">
     <h2 class="card-header-title">{{thread.title}}</h2>
-    <p class="comments-icon card-footer-item">
+    <p class="icon-container card-footer-item">
       <i class="fa-solid fa-pen-to-square" data-id="{{thread.id}}"></i>
       <i class="fa-solid fa-comments" data-id="{{thread.id}}"></i>
     </p>
@@ -13,7 +13,7 @@
   {{/each}}
   {{/if}}
   <a href="/api/thread/">
-    <button class="button new-post">
+    <button class="button teal-btn">
       New Post
     </button>
   </a>

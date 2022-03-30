@@ -46,6 +46,19 @@ router.get('/:id', withAuth, async (req, res) => {
   };
 });
 
+// POST route to create new thread (withAuth)
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const newThread = await Thread.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    res.status(200).json(newThread);
+  } catch(err) {
+    res.status(400).json(err);
+  };
+});
+
 // GET route for editing a thread by its id
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
@@ -74,19 +87,23 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   };
 });
 
-// POST route to create new thread (withAuth)
-router.post('/', withAuth, async (req, res) => {
+
+// PUT route for editted thread content
+
+router.put('/edit/:id', withAuth, async (req, res) => {
   try {
-    const newThread = await Thread.create({
-      ...req.body,
-      user_id: req.session.user_id,
-    });
-    res.status(200).json(newThread);
+    const threadData = await Thread.update(
+      {
+        title: req.body.title,
+        content: req.body.content
+      },
+      {where: {id: req.params.id} }
+    );
+    res.status(200).json(threadData);
   } catch(err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   };
 });
-
 
 module.exports = router;
 
