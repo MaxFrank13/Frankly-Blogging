@@ -1,2 +1,6 @@
 # Frankly-Blogging
-A blog site to hold my ramblings in an attempt to spare those around me.
+
+## Description
+
+A blog site to hold the ramblings of myself and fellow web developers. This is a full stack application built using Express, Sequelize
+
