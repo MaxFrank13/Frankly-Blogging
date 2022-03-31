@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
 					attributes: ['name']
 				},
 			],
+			order: [['date_created', 'DESC']]
 		});
 		const threads = threadData.map(thread => thread.get({ plain: true }));
 		
@@ -54,7 +55,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
     res.render('dashboard', {
       ...user,
-      logged_in: true
+      logged_in: req.session.logged_in
 		});
 	} catch (err) {
 		res.status(500).json(err);

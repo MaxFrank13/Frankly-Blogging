@@ -2,7 +2,7 @@ const handleIcons = (event) => {
   // take to individual thread forum page if clicking multi-comment icon from homepage
   const id = event.target.dataset.id;
   if (event.target.classList.contains('fa-comments')) {
-    document.location.replace(`/api/thread/${id}`);
+    document.location.replace(`/api/comment/all/${id}`);
   };
 
   // open a comment interface if clicking single comment icon
@@ -17,7 +17,7 @@ const handleIcons = (event) => {
 
   // open editing interface if clicking on edit icon
   if (event.target.classList.contains('fa-pen-to-square')) {
-    document.location.replace(`/api/thread/edit/${id}`);
+    document.location.replace(`/api/thread/${id}`);
   }
 };
 
@@ -32,19 +32,26 @@ const handleCommentSubmit = async (event) => {;
   const thread_id = event.target.dataset.threadid;
 
   const content = document.querySelector('#comment-content').value.trim();
-  const response = await fetch(`/api/comment/`, {
-    method: 'POST',
-    body: JSON.stringify({ content, thread_id }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
 
-  if (response.ok) {
-    document.location.replace(`/api/thread/${thread_id}`);
-  } else {
-    alert('Failed to submit comment.');
-  };
+  if (content) {
+    const response = await fetch(`/api/comment/${thread_id}`, {
+      method: 'POST',
+      body: JSON.stringify({ content, thread_id }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    if (response.ok && !response.redirected) {
+      return document.location.replace(`/api/comment/all/${thread_id}`);
+    } else if (response.redirected) {
+      document.location.replace(response.url);
+      return;
+    }
+  }
+
+  alert('Failed to submit comment.');
+  
 };
 
 document

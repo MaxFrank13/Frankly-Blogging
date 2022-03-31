@@ -6,8 +6,9 @@ const handlePost = async (event) => {
   const title = document.querySelector('.thread-title').value.trim();
   const content = document.querySelector('.thread-content').value.trim();
 
-  switch(func) {
-    case "post": 
+  switch (func) {
+
+    case "post":
       if (title && content) {
         const response = await fetch('/api/thread/', {
           method: 'POST',
@@ -16,7 +17,7 @@ const handlePost = async (event) => {
             'Content-Type': 'application/json',
           },
         });
-    
+
         if (response.ok) {
           document.location.replace('/dashboard');
         } else {
@@ -24,9 +25,10 @@ const handlePost = async (event) => {
         };
       };
       break;
+
     case "edit":
       if (title && content) {
-        const response = await fetch(`/api/thread/edit/${id}`, {
+        const response = await fetch(`/api/thread/${id}`, {
           method: 'PUT',
           body: JSON.stringify({ title, content }),
           headers: {
@@ -34,18 +36,37 @@ const handlePost = async (event) => {
           },
         });
 
-        if(response.ok) {
+        if (response.ok) {
           document.location.replace('/dashboard');
         } else {
           alert('Failed to update thread. Make sure to fill in each section.');
         }
       };
       break;
+
+    case "delete":
+      if (confirm('Are you sure you want to delete this post? It will be gone forever!')) {
+        const response = await fetch(`/api/thread/${id}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          document.location.replace('/dashboard');
+        } else {
+          alert('Delete failed');
+        }
+      }
+      break;
+
+    case "cancel":
+      document.location.replace('/dashboard');
+      break;
+
     default:
       console.log('invalid input')
   };
 }
 
 document
-  .querySelector('.post-thread')
+  .querySelector('.btn-container')
   .addEventListener('click', handlePost);

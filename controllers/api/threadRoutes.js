@@ -15,36 +15,6 @@ router.get('/', withAuth, async (req, res) => {
   };
 });
 
-// GET route to get the thread and all of its comments (withAuth)
-router.get('/:id', withAuth, async (req, res) => {
-  try {
-    const threadData = await Thread.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name']
-        },
-        {
-          model: Comment,
-          include: {
-            model: User,
-            attributes: ['name']
-          }
-        },
-      ],
-    });
-
-    const thread = threadData.get({ plain: true });
-
-    res.render('forum', {
-      ...thread,
-      logged_in: true
-    })
-
-  } catch(err) {
-    res.status(500).json(err);
-  };
-});
 
 // POST route to create new thread (withAuth)
 router.post('/', withAuth, async (req, res) => {
@@ -60,7 +30,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // GET route for editing a thread by its id
-router.get('/edit/:id', withAuth, async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
   try {
     const threadData = await Thread.findByPk(req.params.id, {
       include: [
@@ -77,7 +47,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     const thread = threadData.get({ plain: true });
 
     res.render('thread', {
-      logged_in: true,
+      logged_in: req.session.logged_in,
       ...thread,
       state: 'edit',
       edit: true
@@ -87,10 +57,9 @@ router.get('/edit/:id', withAuth, async (req, res) => {
   };
 });
 
-
 // PUT route for editted thread content
 
-router.put('/edit/:id', withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const threadData = await Thread.update(
       {
@@ -105,7 +74,22 @@ router.put('/edit/:id', withAuth, async (req, res) => {
   };
 });
 
-module.exports = router;
-
-
 // DELETE route to remove thread (withAuth)
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const threadData = await Thread.destroy({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id
+      },
+    });
+
+    res.status(200).json(threadData);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+module.exports = router;
