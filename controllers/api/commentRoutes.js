@@ -20,42 +20,28 @@ router.post('/:id', withAuth, async (req, res) => {
 });
 
 // GET route for all of comments to a thread (withAuth)
-router.get('/all/:thread_id', withAuth, async (req, res) => {
+router.get('/all/:id', withAuth, async (req, res) => {
   try {
-    const commentData = await Comment.findAll({
+
+    const threadData = await Thread.findByPk(req.params.id, {
       include: [
         {
-          model: User,
-          attributes: ['name'],
-        },
-        {
-          model: Thread,
+          model: Comment,
           include: [
             {
               model: User,
               attributes: ['name'],
             },
           ],
+          order: [['date_created', 'DESC']]
         },
       ],
-      where: {
-        thread_id: req.params.thread_id,
-      },
-      order: [['date_created', 'DESC']]
     });
-
-    const comments = commentData.map(comment => comment.get({ plain: true }));
-
-    const { title, content, date_created } = comments[0].thread;
-    const { name } = comments[0].thread.user;
+    
+    const thread = threadData.get({ plain: true });
 
     res.render('forum', {
-      comments,
-      title,
-      content,
-      name,
-      date_created,
-      thread_id: req.params.thread_id,
+      ...thread,
       logged_in: req.session.logged_in
     });
 
