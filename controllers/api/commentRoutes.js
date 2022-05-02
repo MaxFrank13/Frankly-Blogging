@@ -20,7 +20,7 @@ router.post('/:id', withAuth, async (req, res) => {
 });
 
 // GET route for all of comments to a thread (withAuth)
-router.get('/all/:id', withAuth, async (req, res) => {
+router.get('/all/:id', async (req, res) => {
   try {
 
     const threadData = await Thread.findByPk(req.params.id, {
@@ -33,17 +33,19 @@ router.get('/all/:id', withAuth, async (req, res) => {
               attributes: ['name'],
             },
           ],
-          order: [['date_created', 'DESC']]
+          order: [['id', 'DESC']]
         },
       ],
     });
     
     const thread = threadData.get({ plain: true });
 
-    res.render('forum', {
-      ...thread,
-      logged_in: req.session.logged_in
-    });
+    res.status(200).json(threadData);
+
+    // res.render('forum', {
+    //   ...thread,
+    //   logged_in: req.session.logged_in
+    // });
 
   } catch(err) {
     res.status(500).json(err);

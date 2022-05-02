@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { json } = require('express/lib/response');
 const { User, Thread, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
@@ -16,7 +15,7 @@ router.get('/all', async (req, res) => {
 
 		const users = userData.map(user => user.get({ plain: true }));
 
-		res.json(users);
+		res.status(200).json(users);
 	} catch (err) {
 		res.status(500).json(err);
 	}
