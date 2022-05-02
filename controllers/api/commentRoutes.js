@@ -40,12 +40,12 @@ router.get('/all/:id', async (req, res) => {
     
     const thread = threadData.get({ plain: true });
 
-    res.status(200).json(threadData);
+    // res.status(200).json(threadData);
 
-    // res.render('forum', {
-    //   ...thread,
-    //   logged_in: req.session.logged_in
-    // });
+    res.render('forum', {
+      ...thread,
+      logged_in: req.session.logged_in
+    });
 
   } catch(err) {
     res.status(500).json(err);
